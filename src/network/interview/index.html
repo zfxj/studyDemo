@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>事件冒泡</title>
+    <script async src="./a.js"></script>
+    <script src="./b.js"></script>
+
+  </head>
+  <body>
+    <div>
+      <p id="parEle">我是父元素 <span id="sonEle">我是子元素</span></p>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+    function add(){
+      var _args = Array.prototype.slice.call(arguments);
+      var _adder = function(){
+        _args.push(...arguments);
+        return _adder;
+      }
+      _adder.toString = function(){
+        return _args.reduce(function(a,b){
+          return a+b
+        })
+      }
+      console.log('object', _adder)
+      return _adder
+    }
+    console.log(add(1)(2)(3))
+ </script>

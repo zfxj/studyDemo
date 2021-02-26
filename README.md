@@ -14,11 +14,14 @@
 ### 脚手架（scaffold）
 
 ### 网络（network）
+[promise](https://github.com/zfxj/studyDemo/tree/main/src/network/promise)
 
 ### 移动端
 ### 算法（arithmetic）  
 
 ### 可视化(visualization)
+
+### 面试
 
 ## 后端
 
