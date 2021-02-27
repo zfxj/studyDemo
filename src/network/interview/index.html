@@ -5,7 +5,6 @@
     <title>事件冒泡</title>
     <script async src="./a.js"></script>
     <script src="./b.js"></script>
-
   </head>
   <body>
     <div>
@@ -14,19 +13,13 @@
   </body>
 </html>
 <script type="text/javascript">
-    function add(){
-      var _args = Array.prototype.slice.call(arguments);
-      var _adder = function(){
-        _args.push(...arguments);
-        return _adder;
-      }
-      _adder.toString = function(){
-        return _args.reduce(function(a,b){
-          return a+b
-        })
-      }
-      console.log('object', _adder)
-      return _adder
+    function fn(){
+      return 1
     }
-    console.log(add(1)(2)(3))
- </script>
+  async function test() {
+    let result = await fn();
+    console.log("result", result);
+  }
+  test()
+  console.log('test()', test())
+</script>
