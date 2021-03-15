@@ -7,7 +7,7 @@
  function selectSort(arr){
      var len=arr.length;
      var minIndex,temp;
-     console.time('选择排序耗时')；
+     console.time('选择排序耗时')
      for(i=0;i<len-1;i++){
          minIndex=i;
          for(j=i+1;j<len;j++){
