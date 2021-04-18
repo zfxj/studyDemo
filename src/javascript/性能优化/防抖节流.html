@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 2000px;
+            width: 300px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+       // 防抖，以最后一次为准（适用于用户在输入的时候进行优化）
+        const debounce = (fun,wait=50)=>{
+            // 缓存一个定时器id
+            let timer = 0;
+            return function(...args){
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(()=>{
+                    fun.apply(this,args);
+                },wait)
+            }
+        }
+        // 节流,以第一次为准（适用于滚动）
+        const throttle = (fun,wait =1500)=>{
+            let lastTime = 0;
+            return function(...args){
+                let now = new Date();
+                if(now-lastTime>wait){
+                    lastTime = now;
+                    fun.apply(this,args);
+                }
+            }
+        }
+        window.onscroll = throttle(function(){
+                console.log("节流")
+            })
+    </script>
+</body>
+</html>

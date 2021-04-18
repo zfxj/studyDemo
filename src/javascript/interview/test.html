@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div>dfdf</div>
+    <div>dfdf</div>
+    <div>dfdf</div>
+<span>fdf</span>
+<span>fdf</span>
+<span>fdf</span>
+
+<p>sdf</p>
+</body>
+<script>
+ var element = document.getElementsByTagName("*");//获取所有标签
+    var obj = {}, max = 0, maxArr = [];
+    for (var index = 0; index < element.length; index++) {
+        if (!obj[element[index].tagName])
+            obj[element[index].tagName] = 1;//如何Obj没有这个标签的属性则为1
+        else
+            obj[element[index].tagName]++;//否则就++
+    }
+    console.log(obj)
+    ///循环一遍obj求出最大值
+    for (const key in obj) {
+        // 页面中可能 有多个相同多的最大值标签
+        if (obj[key] == max) {
+            maxArr.push(key)
+        }
+        // 出现最多次数时
+        if (obj[key] > max) {
+            max = obj[key];
+            maxArr = [];
+            maxArr.push(key)
+        }
+
+    }
+    console.log(`object`, maxArr)
+    console.log('页面中出现最多的标签是maxArr里面的几个值，出现次数是' + max)
+</script>
+</html>

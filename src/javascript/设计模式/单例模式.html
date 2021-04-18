@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .modal {
+        position: fixed;
+        border: 2px solid red;
+        width: 300px;
+        height: 300px;
+        left: 50%;
+        top: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="modal-btn">点我</div>
+    <script>
+      /**
+       * 保证一个类仅有一个实例，并且提供一个访问它的全局访问点。实现的方法为先判断实例是否存在，
+       * 如果存在则直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例
+       */
+      // 比如 1、redux的store也可以理解为单例模式， 2、antd弹窗  3、element弹窗
+
+      // 适用场景：一个单一的对象。比如：弹窗，无论点击多少次，弹窗只应该被创建一次，实现起来也简单，用一个变量缓存即可
+      function getSingle(fn) {
+        // 使用闭包存储期望的单例实例
+        // 把函数fn变成单例
+        let result;
+        return function () {
+          return result || (result = fn.apply(this, arguments));
+        };
+      }
+      function createModalLayer() {
+        console.log(`新建弹窗`);
+        // 期望弹窗是全局唯一的
+        let div = document.createElement("div");
+        div.innerHTML = "我是一个弹窗";
+        div.className = "modal";
+        div.addEventListener(
+          "click",
+          function () {
+            div.style.display = "none";
+          },
+          false
+        );
+        document.body.appendChild(div);
+        return div;
+      }
+      createModalLayer = getSingle(createModalLayer); // 使用单例包裹一次（可以注释看控制台区别）
+      document.getElementById("modal-btn").addEventListener(
+        "click",
+        function () {
+          // 新建弹窗
+          const modalLayer = createModalLayer();
+          // 修改弹窗内部的内容
+          modalLayer.style.display = "block";
+        },
+        false
+      );
+    </script>
+  </body>
+</html>

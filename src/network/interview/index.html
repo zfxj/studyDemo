@@ -13,13 +13,11 @@
   </body>
 </html>
 <script type="text/javascript">
-    function fn(){
-      return 1
+    const deepClone = (obj)=>{
+      let newObj = obj instanceof Array?[]:{};
+      for(let i in obj){
+        newObj[i] = typeof obj[i]=='object'?deepClone(obj[i]):obj[i];
+      }
+      return newObj;
     }
-  async function test() {
-    let result = await fn();
-    console.log("result", result);
-  }
-  test()
-  console.log('test()', test())
 </script>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 代理模式（不要修改源数据）
+       * 为一个对象提供一个代用品或占位符，以便控制对它对访问。
+       * 常用对虚拟代理形式：某一个花销很大的操作，可以通过虚拟代理的方式延迟到这种需要它的时候才去创建（例子：使用虚拟代理实现图片懒加载）
+       * 图片懒加载的方式：先通过一张loading图占位，然后通过异步的方式加载图片，等图片加载好了再把完成的图片加载到img标签里面
+       */
+      let imgFun = (function(){
+          let imgNode = document.createElement('img');
+          document.body.appendChild(imgNode);
+          return{
+              setSrc:function(src){
+                  // 这一步是耗时
+                  imgNode.src = src;
+              }
+          }
+      })()
+      // 使用代理模式，增加loading功能
+      let proxyImage = (function(){
+          let img = new Image();
+          img.onload = function(){
+              // 加载完毕再设置
+              imgFun.setSrc(this.src);
+          }
+          return {
+              setSrc(src){
+                  // 先设置loading
+                  imgFun.setSrc('./laoding.gif') // loading图片路径
+                  img.src = src
+              }
+          }
+      })()
+      proxyImage.setSrc('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa3.att.hudong.com%2F61%2F98%2F01300000248068123885985729957.jpg&refer=http%3A%2F%2Fa3.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621358023&t=ca22cbb4d582b3f546ccbf17ff5b130c')
+    </script>
+  </body>
+</html>
+
+
