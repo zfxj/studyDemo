@@ -6,7 +6,8 @@
 //  比如 map、forEach.....
 var each = function(ary,callBack){
     for(var i=0;i<ary.length;i++){
-        callBack.call(ary[i],i,ary[i])
+        console.log(`this`, this)
+        callBack.call(this,i,ary[i])
     }
 }
 each([1,2,4],function(i,n){
